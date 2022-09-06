@@ -1,45 +1,93 @@
 import React, { Component } from "react";
+import Header from "./components/Header";
+import Personal from "./components/Personal";
+import Education from "./components/Education";
+import Work from "./components/Work";
+import Overview from "./components/Overview";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+
+    this.state = {
+      //Personal Info
+      name: '',
+      email: '',
+      phone: '',
+
+      //Education
+      school: '',
+      certificate: '',
+      dateEnd: new Date().toLocaleDateString('en-US'),
+
+      //Work Experience
+      company: '',
+      title: '',
+      tasks: '',
+      dateFrom: new Date().toLocaleDateString('en-US'),
+      dateUntil: new Date().toLocaleDateString('en-US'),
+
+
+      isFormSubmit: false,
+      //buttonText: 'Submit'
+    }
   }
+
+  handleInput = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      isFormSubmit: true,
+    });
+  }
+
+  handleEdit = (e) => {
+    this.setState({
+      isFormSubmit: false,
+    })
+  }
+
   render() {
-    return (
-      <div className="App">
-        <form>
-          <h3>Details</h3>
-          <label htmlFor="taskInput">Name</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Email</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Phone Number</label>
-          <input type="text" className="userInput"></input>
-          
-          <h3>Education</h3>
-          <label htmlFor="taskInput">School Name</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Certificate</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Date of study</label>
-          <input type="text" className="userInput"></input>
+    if(!this.state.isFormSubmit) {
+      return (
+        <div className="App">
+          <Header/>
+          <form onSubmit={this.handleSubmit}>
+            
+            <Personal
+              onChange = {this.handleInput}
+              info = {this.state}
+            />
+            
+            <Education
+              onChange = {this.handleInput}
+              info = {this.state}
+            />
 
-          <h3>Work Experience</h3>
-          <label htmlFor="taskInput">Company name</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Position</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Title</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">Main tasks</label>
-          <input type="text" className="userInput"></input>
-          <label htmlFor="taskInput">date worked</label>
-          <input type="text" className="userInput"></input>
+            <Work
+              onChange = {this.handleInput}
+              info = {this.state}
+            />
 
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    );
+            <button type="submit" onClick={this.handleSubmit}>Submit</button>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <Overview
+        handleEdit={this.handleEdit}
+        info={this.state}/>
+      )
+    }
   }
 }
 
