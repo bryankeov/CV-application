@@ -10,6 +10,7 @@ const Personal = (props) => {
           id="name" 
           type="text"
           info={props.info.name}
+          placeholder={props.info.name}
           onChange={props.onChange}
         />
       </label>
@@ -20,6 +21,7 @@ const Personal = (props) => {
           id="email" 
           type="text"
           info={props.info.email}
+          placeholder={props.info.email}
           onChange={props.onChange}
         />
       </label>
@@ -30,6 +32,7 @@ const Personal = (props) => {
           id="phone" 
           type="text"
           info={props.info.phone}
+          placeholder={props.info.phone}
           onChange={props.onChange}
         />
       </label>

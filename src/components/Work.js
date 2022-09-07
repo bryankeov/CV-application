@@ -10,6 +10,7 @@ const Work = (props) => {
           id="company" 
           type="text"
           info={props.info.company}
+          placeholder={props.info.company}
           onChange={props.onChange}
         />
       </label>
@@ -20,6 +21,7 @@ const Work = (props) => {
           id="title" 
           type="text"
           info={props.info.title}
+          placeholder={props.info.title}
           onChange={props.onChange}
         />
       </label>
@@ -30,6 +32,7 @@ const Work = (props) => {
           id="tasks" 
           type="text"
           info={props.info.tasks}
+          placeholder={props.info.tasks}
           onChange={props.onChange}
         />
       </label>
@@ -40,12 +43,14 @@ const Work = (props) => {
           id="dateFrom" 
           type="text"
           info={props.info.dateFrom}
+          placeholder={props.info.dateFrom}
           onChange={props.onChange}
-          /> to 
+          />-
         <input 
           id="dateUntil" 
           type="text"
           info={props.info.dateUntil}
+          placeholder={props.info.dateUntil}
           onChange={props.onChange}
           />
       </label>

@@ -4,6 +4,7 @@ import Personal from "./components/Personal";
 import Education from "./components/Education";
 import Work from "./components/Work";
 import Overview from "./components/Overview";
+import "./App.css"
 
 class App extends Component {
   constructor(props) {
@@ -21,18 +22,17 @@ class App extends Component {
       //Education
       school: '',
       certificate: '',
-      dateEnd: new Date().toLocaleDateString('en-US'),
+      dateEnd: new Date().toLocaleDateString('en-AU'),
 
       //Work Experience
       company: '',
       title: '',
       tasks: '',
-      dateFrom: new Date().toLocaleDateString('en-US'),
-      dateUntil: new Date().toLocaleDateString('en-US'),
+      dateFrom: new Date().toLocaleDateString('en-AU'),
+      dateUntil: new Date().toLocaleDateString('en-AU'),
 
 
       isFormSubmit: false,
-      //buttonText: 'Submit'
     }
   }
 
@@ -58,34 +58,43 @@ class App extends Component {
   render() {
     if(!this.state.isFormSubmit) {
       return (
-        <div className="App">
+        <div>
           <Header/>
-          <form onSubmit={this.handleSubmit}>
+          <div className="App">
             
-            <Personal
-              onChange = {this.handleInput}
-              info = {this.state}
-            />
-            
-            <Education
-              onChange = {this.handleInput}
-              info = {this.state}
-            />
+            <form onSubmit={this.handleSubmit}>
+              
+              <Personal
+                onChange = {this.handleInput}
+                info = {this.state}
+              />
+              
+              <Education
+                onChange = {this.handleInput}
+                info = {this.state}
+              />
 
-            <Work
-              onChange = {this.handleInput}
-              info = {this.state}
-            />
+              <Work
+                onChange = {this.handleInput}
+                info = {this.state}
+              />
 
-            <button type="submit" onClick={this.handleSubmit}>Submit</button>
-          </form>
+              <button type="submit" onClick={this.handleSubmit}>Submit</button>
+            </form>
+          </div>
         </div>
       );
     } else {
       return (
-        <Overview
-        handleEdit={this.handleEdit}
-        info={this.state}/>
+        <div>
+          <Header/>
+          <div className="cv">
+            <Overview
+            handleEdit={this.handleEdit}
+            info={this.state}
+            />
+          </div>
+        </div>
       )
     }
   }

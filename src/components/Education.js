@@ -10,6 +10,7 @@ const Education = (props) => {
           id="school" 
           type="text" 
           info={props.info.school}
+          placeholder={props.info.school}
           onChange={props.onChange}
         />
       </label>
@@ -20,6 +21,7 @@ const Education = (props) => {
           id="certificate" 
           type="text"
           info={props.info.certificate}
+          placeholder={props.info.certificate}
           onChange={props.onChange}
         />
       </label>
@@ -30,6 +32,7 @@ const Education = (props) => {
           id="dateEnd" 
           type="text"
           info={props.info.dateEnd}
+          placeholder={props.info.dateEnd}
           onChange={props.onChange}
         />
       </label>

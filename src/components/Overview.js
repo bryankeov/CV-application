@@ -22,6 +22,7 @@ const Overview = (props) => {
         <p>Tasks: {props.info.tasks}</p>
         <p>Duration: {props.info.dateFrom} to {props.info.dateUntil}</p>
       </section>
+      <button id="editButton" onClick={props.handleEdit}>Edit</button>
     </div>
   )
 }
