@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import Personal from "./components/Personal";
 import Education from "./components/Education";
@@ -6,97 +6,87 @@ import Work from "./components/Work";
 import Overview from "./components/Overview";
 import "./App.css"
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
+const App = () => {
+  const [info, setInfo] = useState({
+    //Personal Info
+    name: '',
+    email: '',
+    phone: '',
 
-    this.state = {
-      //Personal Info
-      name: '',
-      email: '',
-      phone: '',
+    //Education
+    school: '',
+    certificate: '',
+    dateEnd: new Date().toLocaleDateString('en-AU'),
 
-      //Education
-      school: '',
-      certificate: '',
-      dateEnd: new Date().toLocaleDateString('en-AU'),
+    //Work Experience
+    company: '',
+    title: '',
+    tasks: '',
+    dateFrom: new Date().toLocaleDateString('en-AU'),
+    dateUntil: new Date().toLocaleDateString('en-AU'),
 
-      //Work Experience
-      company: '',
-      title: '',
-      tasks: '',
-      dateFrom: new Date().toLocaleDateString('en-AU'),
-      dateUntil: new Date().toLocaleDateString('en-AU'),
+    isFormSubmit: false,
+  });
 
-
-      isFormSubmit: false,
-    }
-  }
-
-  handleInput = (e) => {
-    this.setState({
+  const handleInput = (e) => {
+    setInfo({...info,
       [e.target.id]: e.target.value,
-    })
+    });
   }
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
+    setInfo({...info,
       isFormSubmit: true,
     });
   }
 
-  handleEdit = (e) => {
-    this.setState({
+  const handleEdit = (e) => {
+    setInfo({...info,
       isFormSubmit: false,
-    })
+    });
   }
 
-  render() {
-    if(!this.state.isFormSubmit) {
-      return (
-        <div>
-          <Header/>
-          <div className="App">
+  if(!info.isFormSubmit) {
+    return (
+      <div>
+        <Header/>
+        <div className="App">
+          
+          <form onSubmit={handleSubmit}>
             
-            <form onSubmit={this.handleSubmit}>
-              
-              <Personal
-                onChange = {this.handleInput}
-                info = {this.state}
-              />
-              
-              <Education
-                onChange = {this.handleInput}
-                info = {this.state}
-              />
-
-              <Work
-                onChange = {this.handleInput}
-                info = {this.state}
-              />
-
-              <button type="submit" onClick={this.handleSubmit}>Submit</button>
-            </form>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Header/>
-          <div className="cv">
-            <Overview
-            handleEdit={this.handleEdit}
-            info={this.state}
+            <Personal
+              onChange = {handleInput}
+              info = {info}
             />
-          </div>
+            
+            <Education
+              onChange = {handleInput}
+              info = {info}
+            />
+
+            <Work
+              onChange = {handleInput}
+              info = {info}
+            />
+
+            <button type="submit" onClick={handleSubmit}>Submit</button>
+          </form>
         </div>
-      )
-    }
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Header/>
+        <div className="cv">
+          <Overview
+          handleEdit={handleEdit}
+          info={info}
+          />
+        </div>
+      </div>
+    )
   }
 }
 
